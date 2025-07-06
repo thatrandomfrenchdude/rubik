@@ -1,0 +1,6 @@
+openai==1.93.0
+ping3==4.0.8
+psutil==7.0.0
+PyYAML==6.0.2
+rich==14.0.0
+
