@@ -12,9 +12,14 @@ This guide assumes you have basic knowledge of terminal commands and Python.
 ## Launch a Terminal Session
 1. In a terminal, run:
     ```bash
-    screen -S [session name] /dev/tty.[name] 115200
+    screen -S session-name /dev/tty.device-name 115200
     ```
-    Replace `[session name]` and `[device name]` with the name of your session and Rubik Pi device respectively.
+    Replace `session-name` and `device-name` with a name for your screen session and Rubik Pi device respectively.
+
+    For example, if your Rubik Pi device is connected as `/dev/tty.usbserial-123456` and you want to name your session `rubik-pi`, run:
+    ```bash
+    screen -S rubik-pi /dev/tty.usbserial-123456 115200
+    ```
 
 ## Send a File
 0. Activate a terminal session with the Rubik Pi device.
@@ -24,7 +29,14 @@ This guide assumes you have basic knowledge of terminal commands and Python.
     ```
 2. In the terminal, run:
     ```bash
-    screen -S iot -X exec '!!' sz -b -e path/to/file
+    screen -S session-name -X exec '!!' sz -b -e path/to/file
+    ```
+    Replace `session-name` and `path/to/file` with the screen session name and path to the file you want to send respectively.
+
+    For example, to send `config.yaml` and assuming your screen session is named `rubik-pi`, run:
+    ```bash
+    screen -S rubik-pi -X exec '!!' sz -b -e config.yaml
+    ```
 
 ## Check Resource Usage
 ### Storage
