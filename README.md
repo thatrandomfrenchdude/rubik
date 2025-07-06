@@ -1,4 +1,6 @@
-# Rubik Pi Guide
+# Rubik Pi Quick Guide
+
+I am using an M4 Max Macbook Pro to interface with the Rubik Pi device. This guide assumes you have basic knowledge of terminal commands and Python.
 
 ## Launch a Terminal Session
 1. In a terminal, run:
