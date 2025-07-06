@@ -1,6 +1,13 @@
 # Rubik Pi Quick Guide
 
-I am using an M4 Max Macbook Pro to interface with the Rubik Pi device. This guide assumes you have basic knowledge of terminal commands and Python.
+I am using an M4 Macbook Pro to interface with the Rubik Pi device.<br><br>
+This guide assumes you have basic knowledge of terminal commands and Python.
+
+**Table of Contents**
+- [Launch a Terminal Session](#launch-a-terminal-session)
+- [Send a File](#send-a-file)
+- [Check Resource Usage](#check-resource-usage)
+- [Documentation Links](#documentation-links)
 
 ## Launch a Terminal Session
 1. In a terminal, run:
@@ -31,3 +38,8 @@ In a terminal, run:
 ```bash
 free -h
 ```
+
+## Documentation Links
+- [Rubik Pi Documentation](https://www.thundercomm.com/rubik-pi-3/en/docs/rubik-pi-3-user-manual/)
+- [Llama API Documentation](https://llama.developer.meta.com/docs/overview/)
+- [GitHub Repo](https://github.com/thatrandomfrenchdude/rubik)
