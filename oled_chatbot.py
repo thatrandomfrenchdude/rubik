@@ -15,6 +15,7 @@ Dependencies: luma.oled, openai, pyyaml
 import yaml
 import time
 import textwrap
+import re
 from collections import deque
 from openai import OpenAI
 
@@ -53,6 +54,22 @@ class OLEDChatbot:
             # Scrolling text buffer - stores lines to display
             self.text_buffer = deque(maxlen=100)  # Keep last 100 lines
             self.display_offset = 0  # For scrolling
+            
+    def clean_markdown_text(self, text):
+        """Remove markdown formatting and preserve paragraph spacing."""
+        # Remove markdown formatting
+        text = re.sub(r'\*\*(.*?)\*\*', r'\1', text)  # Bold
+        text = re.sub(r'\*(.*?)\*', r'\1', text)      # Italic
+        text = re.sub(r'`(.*?)`', r'\1', text)        # Code
+        text = re.sub(r'#{1,6}\s*(.*)', r'\1', text)  # Headers
+        text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)  # Links
+        text = re.sub(r'^\s*[-*+]\s+', '', text, flags=re.MULTILINE)  # Bullet points
+        text = re.sub(r'^\s*\d+\.\s+', '', text, flags=re.MULTILINE)  # Numbered lists
+        
+        # Convert double newlines to paragraph breaks
+        text = re.sub(r'\n\s*\n', '\n\n', text)
+        
+        return text.strip()
         
     def clear_display(self):
         """Clear the OLED display."""
@@ -63,31 +80,41 @@ class OLEDChatbot:
     
     def wrap_text(self, text, prefix=""):
         """Wrap text to fit OLED display width."""
+        # Clean markdown first
+        text = self.clean_markdown_text(text)
+        
         # Add prefix to first line
         prefixed_text = prefix + text
         
-        # Wrap text to fit display
-        lines = []
-        words = prefixed_text.split()
-        current_line = ""
+        # Split into paragraphs and process
+        paragraphs = prefixed_text.split('\n\n')
+        all_lines = []
         
-        for word in words:
-            test_line = current_line + (" " if current_line else "") + word
-            if len(test_line) <= self.max_chars_per_line:
-                current_line = test_line
-            else:
-                if current_line:
-                    lines.append(current_line)
-                    current_line = word
-                else:
-                    # Word is too long, break it
-                    lines.append(word[:self.max_chars_per_line])
-                    current_line = word[self.max_chars_per_line:]
-        
-        if current_line:
-            lines.append(current_line)
+        for i, paragraph in enumerate(paragraphs):
+            if i > 0:  # Add empty line between paragraphs
+                all_lines.append("")
             
-        return lines
+            # Wrap paragraph text to fit display
+            words = paragraph.split()
+            current_line = ""
+            
+            for word in words:
+                test_line = current_line + (" " if current_line else "") + word
+                if len(test_line) <= self.max_chars_per_line:
+                    current_line = test_line
+                else:
+                    if current_line:
+                        all_lines.append(current_line)
+                        current_line = word
+                    else:
+                        # Word is too long, break it
+                        all_lines.append(word[:self.max_chars_per_line])
+                        current_line = word[self.max_chars_per_line:]
+            
+            if current_line:
+                all_lines.append(current_line)
+                
+        return all_lines
     
     def add_message(self, message, is_user=True):
         """Add a message to the text buffer with proper formatting."""
@@ -106,7 +133,7 @@ class OLEDChatbot:
         # Auto-scroll to bottom
         self.scroll_to_bottom()
     
-    def add_message_streaming(self, message, is_user=True, word_delay=0.3):
+    def add_message_streaming(self, message, is_user=True, word_delay=0.4):
         """Add a message to the display with reading-pace streaming effect and Star Wars scrolling."""
         if not self.use_display:
             return
@@ -197,7 +224,7 @@ class OLEDChatbot:
             self.clear_display()
             
             # Add initial message to buffer with streaming
-            self.add_message_streaming("Welcome! Type 'exit' to quit.", False, 0.2)
+            self.add_message_streaming("Welcome! Type 'exit' to quit.", False, 0.27)
         
         while True:
             try:
@@ -217,12 +244,12 @@ class OLEDChatbot:
                         self.text_buffer.clear()
                         self.display_offset = 0
                         self.update_display()  # Clear the display immediately
-                        self.add_message_streaming("Display cleared.", False, 0.2)
+                        self.add_message_streaming("Display cleared.", False, 0.27)
                     continue
                 
                 # Add user message to display with streaming
                 if self.use_display:
-                    self.add_message_streaming(user_input, True, 0.2)  # Faster for user input
+                    self.add_message_streaming(user_input, True, 0.27)  # Slower: 75% of 0.2 = ~0.27
                 
                 # Add user message to chat history
                 self.chat_history.append({"role": "user", "content": user_input})
@@ -250,7 +277,7 @@ class OLEDChatbot:
                 
                 # Then add bot response to display with reading-pace streaming
                 if self.use_display:
-                    self.add_message_streaming(assistant_response, False, 0.4)  # Slower for reading pace
+                    self.add_message_streaming(assistant_response, False, 0.53)  # Slower: 75% of 0.4 = ~0.53
                 
                 # Add assistant response to chat history
                 self.chat_history.append({"role": "assistant", "content": assistant_response})
