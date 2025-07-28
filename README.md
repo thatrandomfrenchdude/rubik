@@ -5,6 +5,13 @@ This is my own personal guide to using the Rubik Pi device for various software 
 **Table of Contents**
 - [A Note on My Development Environment](#a-note-on-my-development-environment)
 - [Workflows](#workflows)
+    - [Prequisites](#prequisites)
+    - [Launch a Terminal Session](#launch-a-terminal-session)
+    - [Set Up Wifi](#set-up-wifi)
+    - [Send a File](#send-a-file)
+    - [Check Resource Usage](#check-resource-usage)
+    - [Storage](#storage)
+    - [Return to Table of Contents](#table-of-contents)
 - [Documentation Links](#documentation-links)
 
 ## A Note on My Development Environment
@@ -16,27 +23,22 @@ I am using either a Macbook Pro or Dell as a host machine to interface with the 
 | **Dell 7455**     | Snapdragon X Elite | 32GB     | Windows 11           |
 
 ## Workflows
-Workflows for common tasks. Below documentation contains linux commands. Windows and Linux commands are available in the [Rubik Pi Documentation](https://www.thundercomm.com/rubik-pi-3/en/docs/rubik-pi-3-user-manual/)
+Workflows for common tasks using linux commands. Both Windows and Linux commands are available in the [Rubik Pi Documentation](https://www.thundercomm.com/rubik-pi-3/en/docs/rubik-pi-3-user-manual/).
 
-**Workflow Lookup Table:**
-- [Launch a Terminal Session](#launch-a-terminal-session)
-- [Set Up Wifi](#set-up-wifi)
-- [Send a File](#send-a-file)
-- [Check Resource Usage](#check-resource-usage)
-- [Storage](#storage)
-- [Return to Table of Contents](#table-of-contents)
+### Prequisites
+These workflows assume the following prerequisites are met.
+
+*Rubik Pi*
+- The device is connected to the host machine via USB.
+- A power supply is connected (can be the host machine).
+- `lrzsz` and `vi` installed.
+
+*Host Machine*
+- A terminal application on the host machine (I use the built-in VS Code terminal).
+- `lrzsz` and `screen` are installed.
 
 ### Launch a Host Machine Terminal Session on the Rubik Pi Device
 Connect a terminal on the host machine to the Rubik Pi device using `screen`.
-
-Prerequisites:
-- `screen` installed on the host machine. On macOS, it is pre-installed.
-- `lrzsz` installed on the Rubik Pi device. If not installed, install it using:
-    ```bash
-    opkg update
-    opkg install lrzsz
-    ```
-
 1. Connect the Rubik Pi device to your host machine via USB.
 2. Connect the power supply to the Rubik Pi device (can be the host machine).
 3. In a terminal window, run:
@@ -55,53 +57,59 @@ Prerequisites:
     - Password: `rubikpi`
 
 ### Set Up Wifi
-1. use `vi` in the console to edit the wpa_supplicant.conf file:
+Configure the wifi connection on the Rubik Pi device.
+1. [Launch a Rubik Pi terminal session](#launch-a-host-machine-terminal-session-on-the-rubik-pi-device) on the host machine.
+2. use `vi` in the console to edit the wpa_supplicant.conf file:
     ```bash
     vi /etc/wpa_supplicant/wpa_supplicant.conf
     ```
-2. Add your network details:
+3. Add your network details:
     ```config
     network={
         ssid="your_SSID"
         psk="your_password"
     }
     ```
-    Note: press `i` to enter insert mode in `vi` and `Esc` to exit. 
-3. Save and exit the file by typing `:wq` and pressing `Enter`.
-4. Restart the wifi interface:
+    Note: press `i` to enter insert mode in `vi` and `Esc` to exit.
+4. Save and exit the file by typing `:wq` and pressing `Enter`.
+5. Restart the wifi interface:
     ```bash
     ifdown wlan0 && ifup wlan0
     ```
 
 ### Send a File from the Host Machine to the Rubik Pi
-0. Activate a terminal session with the Rubik Pi device.
-1. On the Rubik Pi, run:
+Send files written on the host machine to the Rubik Pi device using `lrzsz`.
+1. [Launch a Rubik Pi terminal session](#launch-a-host-machine-terminal-session-on-the-rubik-pi-device) on the host machine.
+2. In the Rubik Pi terminal session, prepare to receive a file by running:
     ```bash
     rz -b -y
     ```
-2. In the terminal, run:
+2. On the host machine, in a separate terminal window, send the file using `sz`:
     ```bash
     screen -S session-name -X exec '!!' sz -b -e path/to/file
-    ```
-    Replace `session-name` and `path/to/file` with the screen session name and path to the file you want to send respectively.
 
-    For example, to send `config.yaml` and assuming your screen session is named `rubik-pi`, run:
-    ```bash
+    # replace `session-name` with your screen session name
+    # replace `path/to/file` with the path to the send file
+
+    # Example:
     screen -S rubik-pi -X exec '!!' sz -b -e config.yaml
+
+    # session-name: rubik-pi
+    # path/to/file: config.yaml
     ```
 
 ### Check Resource Usage
 ### Storage
-In a terminal, run:
-```bash
-df -h
-```
+Check the available RAM and storage on the Rubik Pi device.
+1. [Launch a Rubik Pi terminal session](#launch-a-host-machine-terminal-session-on-the-rubik-pi-device) on the host machine.
+2. In the terminal, run the following commands:
+    ```bash
+    # Check storage usage
+    df -h
 
-### RAM
-In a terminal, run:
-```bash
-free -h
-```
+    # Check RAM usage
+    free -h
+    ```
 
 ## Documentation Links
 - [Rubik Pi Documentation](https://www.thundercomm.com/rubik-pi-3/en/docs/rubik-pi-3-user-manual/)
