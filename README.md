@@ -62,3 +62,4 @@ free -h
 - [Rubik Pi Documentation](https://www.thundercomm.com/rubik-pi-3/en/docs/rubik-pi-3-user-manual/)
 - [Llama API Documentation](https://llama.developer.meta.com/docs/overview/)
 - [GitHub Repo](https://github.com/thatrandomfrenchdude/rubik)
+- [Hardware Diagram](https://www.thundercomm.com/rubik-pi-3/en/docs/rubik-pi-3-user-manual/1.0.0-a/peripherals-and-interfaces/)
