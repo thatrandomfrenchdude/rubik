@@ -99,7 +99,6 @@ Send files written on the host machine to the Rubik Pi device using `lrzsz`.
     ```
 
 ### Check Resource Usage
-### Storage
 Check the available RAM and storage on the Rubik Pi device.
 1. [Launch a Rubik Pi terminal session](#launch-a-host-machine-terminal-session-on-the-rubik-pi-device) on the host machine.
 2. In the terminal, run the following commands:
