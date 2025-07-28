@@ -27,6 +27,23 @@ This guide assumes you have basic knowledge of terminal commands and Python.
     - Password: `rubikpi`
 
 ## Set Up Wifi
+1. use `vi` in the console to edit the wpa_supplicant.conf file:
+    ```bash
+    vi /etc/wpa_supplicant/wpa_supplicant.conf
+    ```
+2. Add your network details:
+    ```config
+    network={
+        ssid="your_SSID"
+        psk="your_password"
+    }
+    ```
+    Note: press `i` to enter insert mode in `vi` and `Esc` to exit. 
+3. Save and exit the file by typing `:wq` and pressing `Enter`.
+4. Restart the wifi interface:
+    ```bash
+    ifdown wlan0 && ifup wlan0
+    ```
 
 ## Send a File
 0. Activate a terminal session with the Rubik Pi device.
