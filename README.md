@@ -21,6 +21,13 @@ This guide assumes you have basic knowledge of terminal commands and Python.
     screen -S rubik-pi /dev/tty.usbserial-123456 115200
     ```
 
+2. Log in to the Rubik Pi device using your username and password.
+    Default credentials are:
+    - Username: `root`
+    - Password: `rubikpi`
+
+## Set Up Wifi
+
 ## Send a File
 0. Activate a terminal session with the Rubik Pi device.
 1. On the Rubik Pi, run:
