@@ -1,3 +1,4 @@
+Adafruit-BMP==1.5.4
 luma.oled==3.14.0
 openai==1.93.0
 ping3==4.0.8
@@ -5,4 +6,5 @@ psutil==7.0.0
 python-periphery==2.4.1
 PyYAML==6.0.2
 rich==14.0.0
-
+smbus2==0.5.0
+mpu6050-raspberrypi==1.2
