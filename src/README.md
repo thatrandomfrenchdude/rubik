@@ -244,6 +244,7 @@ python sensors.py
 **Features**:
 - Real-time accelerometer readings (X, Y, Z axes in g-force)
 - Barometric pressure monitoring (hPa)
+- Ambient temperature reading (°C)
 - Pressure trend sparkline (32-point history)
 - 1-second update rate
 - Clean display shutdown

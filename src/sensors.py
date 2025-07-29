@@ -99,7 +99,10 @@ def run_dashboard():
             while True:
                 # Read sensors
                 adata   = accel.get_accel_data()  # returns dict x,y,z
-                ax, ay, az = adata['x'], adata['y'], adata['z']
+                ax, ay, az = adata['x'], adata['y'], adata['z'] # units are m/s²
+                # ax /= 9.80665  # convert to g
+                # ay /= 9.80665
+                # az /= 9.80665
                 ambient  = baro.read_temperature() # °C
                 pressure = baro.read_pressure() / 100.0  # Pa→hPa
 
