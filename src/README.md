@@ -12,6 +12,7 @@ This directory contains Python scripts for the Rubik Pi device, featuring OLED d
   - [oled_chatbot.py](#oled_chatbotpy)
   - [oled_dashboard.py](#oled_dashboardpy)
   - [sensors.py](#sensorspy)
+  - [stick_figure_walker.py](#stick_figure_walkerpy)
 - [Troubleshooting](#troubleshooting)
 
 ## Scripts Overview
@@ -22,6 +23,7 @@ This directory contains Python scripts for the Rubik Pi device, featuring OLED d
 | `oled_chatbot.py` | AI chatbot with OLED output | SSD1306 OLED, Internet |
 | `oled_dashboard.py` | System metrics dashboard | SSD1306 OLED |
 | `sensors.py` | MPU-6050 & BMP180 sensor monitoring | SSD1306 OLED, MPU-6050, BMP180 |
+| `stick_figure_walker.py` | Animated stick figure walking with scenery | SSD1306 OLED |
 
 ## Hardware Requirements
 
@@ -256,6 +258,44 @@ python sensors.py
 
 **Controls**:
 - Press `Ctrl+C` to stop monitoring
+
+---
+
+### stick_figure_walker.py
+
+**Description**: Animated stick figure that walks clockwise around the perimeter of the OLED display with scenic forest elements in the center.
+
+**Purpose**: Entertainment animation demonstrating character movement, collision avoidance, and scenic backdrop rendering.
+
+**Requirements**:
+- SSD1306 OLED display on I2C1
+- `luma.oled`
+
+**Usage**:
+```bash
+python stick_figure_walker.py
+```
+
+**Features**:
+- Smooth clockwise walking animation around display perimeter (128x64 pixels)
+- Animated stick figure with alternating leg movement for realistic walking
+- Forest scenery backdrop: trees, lake, and flowers in center area
+- Collision-free path planning (figure stays within display bounds)
+- Continuous loop animation
+- Configurable walking speed and animation timing
+
+**Animation Details**:
+- **Walking Path**: Follows display edges (top→right→bottom→left)
+- **Stick Figure**: 8x12 pixel character with head, body, arms, and animated legs
+- **Scenery Elements**:
+  - Central lake (oval shape)
+  - Two triangular trees with trunks
+  - Three small flowers scattered around
+- **Frame Rate**: ~10 FPS (0.1 second intervals)
+- **Walking Speed**: 2 pixels per frame
+
+**Controls**:
+- Press `Ctrl+C` to stop animation
 
 ---
 
