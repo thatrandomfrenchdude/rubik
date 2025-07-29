@@ -1,11 +1,12 @@
 # Rubik Pi Developer Guide
 
-This is my own personal guide to using the Rubik Pi device for various software projects. This guide assumes you have basic knowledge of terminal commands and Python.<br><br>
+This is my own personal guide to using the Rubik Pi device for various software projects. It is intended to be used alongside my development workflows when targeting the Rubik Pi hardware. I hope you find it useful!
+
+This guide assumes you have basic knowledge of terminal commands and Python.
 
 **Table of Contents**
-- [A Note on My Development Environment](#a-note-on-my-development-environment)
+- [A Note on My Development Environments](#a-note-on-my-development-environments)
 - [Workflows](#workflows)
-    - [Prequisites](#prequisites)
     - [Launch a Terminal Session](#launch-a-terminal-session)
     - [Set Up Wifi](#set-up-wifi)
     - [Send a File](#send-a-file)
@@ -16,7 +17,7 @@ This is my own personal guide to using the Rubik Pi device for various software 
 - [Pinout Diagram](#pinout-diagram)
 - [Documentation Links](#documentation-links)
 
-## A Note on My Development Environment
+## A Note on My Development Environments
 I am using either a Macbook Pro or Dell as a host machine to interface with the Rubik Pi device. See the below table for details.
 
 |               | CPU                | RAM      | OS                  |
@@ -25,10 +26,7 @@ I am using either a Macbook Pro or Dell as a host machine to interface with the 
 | **Dell 7455**     | Snapdragon X Elite | 32GB     | Windows 11           |
 
 ## Workflows
-Workflows for common tasks using linux commands. Both Windows and Linux commands are available in the [Rubik Pi Documentation](https://www.thundercomm.com/rubik-pi-3/en/docs/rubik-pi-3-user-manual/).
-
-### Prequisites
-These workflows assume the following prerequisites are met.
+Workflows for common tasks using linux commands. Both Windows and Linux commands are available in the [Rubik Pi Documentation](https://www.thundercomm.com/rubik-pi-3/en/docs/rubik-pi-3-user-manual/). These workflows assume the below prerequisites are met on the Rubik Pi device and host machine.
 
 *Rubik Pi*
 - The device is connected to the host machine via USB.
