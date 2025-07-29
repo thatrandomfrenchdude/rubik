@@ -4,6 +4,8 @@ This is my own personal guide to using the Rubik Pi device for various software 
 
 This guide assumes you have basic knowledge of terminal commands and Python.
 
+![Rubik Pi Device](assets/rubik.jpg)
+
 **Table of Contents**
 - [A Note on My Development Environments](#a-note-on-my-development-environments)
 - [Workflows](#workflows)
@@ -24,6 +26,9 @@ I am using either a Macbook Pro or Dell as a host machine to interface with the 
 |---------------|--------------------|----------|----------------------|
 | **Macbook Pro**   | M4 Max             | 64GB     | macOS Sequoia  |
 | **Dell 7455**     | Snapdragon X Elite | 32GB     | Windows 11           |
+
+## Source Code
+The source code for the Rubik Pi device is located in the `src` directory. It contains Python scripts for various applications, including OLED display demos, sensor monitoring, and AI chatbot functionality.
 
 ## Workflows
 Workflows for common tasks using linux commands. Both Windows and Linux commands are available in the [Rubik Pi Documentation](https://www.thundercomm.com/rubik-pi-3/en/docs/rubik-pi-3-user-manual/). These workflows assume the below prerequisites are met on the Rubik Pi device and host machine.
