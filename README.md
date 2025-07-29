@@ -4,7 +4,7 @@ This is my own personal guide to using the Rubik Pi device for various software 
 
 This guide assumes you have basic knowledge of terminal commands and Python.
 
-![Rubik Pi Device](assets/rubik.jpg)
+![Rubik Pi with sensors](assets/rubik.jpg)
 
 **Table of Contents**
 - [A Note on My Development Environments](#a-note-on-my-development-environments)
