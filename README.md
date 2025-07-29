@@ -13,7 +13,7 @@ This is my own personal guide to using the Rubik Pi device for various software 
     - [Check Resource Usage](#check-resource-usage)
     - [Storage](#storage)
     - [Return to Table of Contents](#table-of-contents)
-- []()
+- [Pinout Diagram](#pinout-diagram)
 - [Documentation Links](#documentation-links)
 
 ## A Note on My Development Environment
