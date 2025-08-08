@@ -27,8 +27,9 @@ The [docs](docs) directory contains a subset of workflows for common tasks on th
 
 I am currently running [Ubuntu 24.04](docs/ubuntu-2404.md), but it needs to be flashed according to the [setup instructions](docs/ubuntu-2404.md#flashing-the-rubik-pi-device-with-ubuntu-2404). The [Qualcomm Linux Workflows](docs/qualcomm-linux.md) will work out-of-the-box with the Rubik Pi V02.
 
-## Pinout Diagram
+## Rubik Pi Pinout Diagram
 ![Rubik Pi Pinout Diagram](assets/rubik-pi-pinout.jpg)
+
 
 ## Documentation Links
 - [Rubik Pi Documentation](https://www.thundercomm.com/rubik-pi-3/en/docs/rubik-pi-3-user-manual/)
