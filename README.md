@@ -20,15 +20,12 @@ I am using either a Macbook Pro or Dell as a host machine to interface with the 
 | **Dell 7455**     | Snapdragon X Elite | 32GB     | Windows 11           |
 
 ## Source Code
-The source code for the Rubik Pi device is located in the [`src`](src) directory. It contains Python scripts for various applications, including OLED display demos, sensor monitoring, and AI chatbot functionality.
+The source code for the Rubik Pi device is located in the [`src`](src) directory. It contains Python scripts for various applications, including OLED display demos, sensor monitoring, and AI chatbot functionality. See the [README](src/README.md) in the `src` directory for more details on each script.
 
 ## Workflows and Versions
-Workflows for common tasks [Qualcomm Linux](docs/qualcomm-linux.md) and [Ubuntu](docs/ubuntu-2404.md).
+A subset of workflows for common tasks on the Rubik Pi running [Qualcomm Linux](docs/qualcomm-linux.md) or [Ubuntu](docs/ubuntu-2404.md) can be found in the [docs](docs) directory. A comprehensive list of commands are available in the [Rubik Pi Documentation](https://www.thundercomm.com/rubik-pi-3/en/docs/rubik-pi-3-user-manual/). 
 
-I am currently running [Ubuntu 24.04](docs/ubuntu-2404.md), but it needs to be flashed according to the [setup instructions](#setup-instructions). The [Qualcomm Linux Workflows](docs/qualcomm-linux.md) will work out-of-the-box with the Rubik Pi V02.
-
-## Setup Instructions
-TBD
+I am currently running [Ubuntu 24.04](docs/ubuntu-2404.md), but it needs to be flashed according to the [setup instructions](docs/ubuntu-2404.md#flashing-the-rubik-pi-device-with-ubuntu-2404). The [Qualcomm Linux Workflows](docs/qualcomm-linux.md) will work out-of-the-box with the Rubik Pi V02.
 
 ## Pinout Diagram
 ![Rubik Pi Pinout Diagram](assets/rubik-pi-pinout.jpg)

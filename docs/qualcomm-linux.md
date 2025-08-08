@@ -1,20 +1,20 @@
 # Qualcomm Linux Workflows
 
-This document provides workflows for common tasks on the Rubik Pi device running Qualcomm Linux as the OS. This guide should work with the Rubik Pi V02 out-of-the-box, but may require some adjustments for other versions.
+This document provides workflows for common tasks on the Rubik Pi device running Qualcomm Linux. This guide should work with the Rubik Pi V02 out-of-the-box, but may require some adjustments for other versions.
 
 **Table of Contents**
-- [Launch a Terminal Session](#launch-a-terminal-session)
+- [Prerequisites](#prerequisites)
+- [Launch a Host Terminal Session on the Rubik Pi Device](#launch-a-host-machine-terminal-session-on-the-rubik-pi-device)
 - [Set Up Wifi](#set-up-wifi)
-- [Send a File](#send-a-file)
+- [Send a File from Host to the Rubik Pi](#send-a-file-from-the-host-machine-to-the-rubik-pi)
 - [Run a Python File](#run-a-python-file-on-the-rubik-pi)
 - [Check Resource Usage](#check-resource-usage)
-- [Storage](#storage)
-- [Return to Table of Contents](#table-of-contents)
 
-## Workflows
-Workflows for common tasks using linux commands. Both Windows and Linux commands are available in the [Rubik Pi Documentation](https://www.thundercomm.com/rubik-pi-3/en/docs/rubik-pi-3-user-manual/). These workflows assume the below prerequisites are met on the Rubik Pi device and host machine.
+## Prerequisites
+These workflows assume the below prerequisites are met on the Rubik Pi device and host machine.
 
 *Rubik Pi*
+- The Rubik Pi device is running Qualcomm Linux.
 - The device is connected to the host machine via USB.
 - A power supply is connected (can be the host machine).
 - `lrzsz` and `vi` installed.
@@ -23,7 +23,7 @@ Workflows for common tasks using linux commands. Both Windows and Linux commands
 - A terminal application on the host machine (I use the built-in VS Code terminal).
 - `lrzsz` and `screen` are installed.
 
-### Launch a Host Machine Terminal Session on the Rubik Pi Device
+## Launch a Host Machine Terminal Session on the Rubik Pi Device
 Connect a terminal on the host machine to the Rubik Pi device using `screen`.
 1. Connect the Rubik Pi device to your host machine via USB.
 2. Connect the power supply to the Rubik Pi device (can be the host machine).
@@ -47,7 +47,7 @@ Connect a terminal on the host machine to the Rubik Pi device using `screen`.
     screen -r session-name
     ```
 
-### Set Up Wifi
+## Set Up Wifi
 Configure the wifi connection on the Rubik Pi device.
 1. [Launch a Rubik Pi terminal session](#launch-a-host-machine-terminal-session-on-the-rubik-pi-device) on the host machine.
 2. use `vi` in the console to edit the wpa_supplicant.conf file:
@@ -68,7 +68,7 @@ Configure the wifi connection on the Rubik Pi device.
     ifdown wlan0 && ifup wlan0
     ```
 
-### Send a File from the Host Machine to the Rubik Pi
+## Send a File from the Host Machine to the Rubik Pi
 Send files written on the host machine to the Rubik Pi device using `lrzsz`.
 1. [Launch a Rubik Pi terminal session](#launch-a-host-machine-terminal-session-on-the-rubik-pi-device) on the host machine.
 2. In the Rubik Pi terminal session, prepare to receive a file by running:
@@ -89,7 +89,7 @@ Send files written on the host machine to the Rubik Pi device using `lrzsz`.
     # path/to/file: config.yaml
     ```
 
-### Run a Python File on the Rubik Pi
+## Run a Python File on the Rubik Pi
 Run a Python script on the Rubik Pi device.
 
 1. Write some Python code and an accompanying requirements.txt file on your host machine.
@@ -108,7 +108,7 @@ Run a Python script on the Rubik Pi device.
     ```
     Replace `your_script.py` with the name of your Python file.
 
-### Check Resource Usage
+## Check Resource Usage
 Check the available RAM and storage on the Rubik Pi device.
 1. [Launch a Rubik Pi terminal session](#launch-a-host-machine-terminal-session-on-the-rubik-pi-device) on the host machine.
 2. In the terminal, run the following commands:
