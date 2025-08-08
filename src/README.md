@@ -9,6 +9,9 @@ This directory contains Python scripts for the Rubik Pi device, featuring OLED d
 - [Setup Instructions](#setup-instructions)
 - [Script Details](#script-details)
   - [audrey_display.py](#audrey_displaypy)
+  - [camera.py](#camerapy)
+  - [game_of_life.py](#game_of_lifepy)
+  - [hamster.py](#hamsterpy)
   - [oled_chatbot.py](#oled_chatbotpy)
   - [oled_dashboard.py](#oled_dashboardpy)
   - [sensors.py](#sensorspy)
@@ -20,6 +23,9 @@ This directory contains Python scripts for the Rubik Pi device, featuring OLED d
 | Script | Purpose | Hardware Required |
 |--------|---------|-------------------|
 | `audrey_display.py` | Animated text display demo | SSD1306 OLED |
+| `camera.py` | Camera capture with CPU temp monitoring | SSD1306 OLED, Camera |
+| `game_of_life.py` | Conway's Game of Life simulation | SSD1306 OLED |
+| `hamster.py` | Animated hamster-in-a-wheel | SSD1306 OLED |
 | `oled_chatbot.py` | AI chatbot with OLED output | SSD1306 OLED, Internet |
 | `oled_dashboard.py` | System metrics dashboard | SSD1306 OLED |
 | `sensors.py` | MPU-6050 & BMP180 sensor monitoring | SSD1306 OLED, MPU-6050, BMP180 |
@@ -68,6 +74,9 @@ pip install -r requirements.txt
 
 ### AI Chatbot Dependencies
 - `openai==1.93.0` - Llama API client
+
+### Camera Dependencies (for camera.py)
+- `opencv-python` - Computer vision and camera capture library
 
 ### Sensor Dependencies (for sensors.py)
 - `smbus2` - I2C bus communication
@@ -124,6 +133,153 @@ python audrey_display.py
 
 **Controls**:
 - Press `Ctrl+C` to stop
+
+---
+
+### camera.py
+
+**Description**: Camera capture module with CPU temperature monitoring displayed on OLED screen, featuring real-time video feed and thermal statistics.
+
+**Purpose**: Reusable camera module for video capture with system monitoring and visual feedback.
+
+**Requirements**:
+- SSD1306 OLED display on I2C1
+- Camera device (USB or CSI camera)
+- `luma.oled`, `opencv-python`
+
+**Usage**:
+```bash
+python camera.py
+```
+
+**Features**:
+- Real-time camera video capture and display
+- CPU temperature monitoring and logging
+- Temperature history sparkline visualization
+- Configurable camera index and update intervals
+- OLED display with statistics overlay
+- Frame counter and thermal trend tracking
+- Graceful error handling for missing hardware
+
+**Configuration Options**:
+- **Camera Index**: Configurable camera device index (default: 2)
+- **OLED Address**: I2C address configuration (default: 0x3C)
+- **History Length**: Temperature reading buffer size (default: 32 readings)
+- **Update Interval**: Temperature refresh rate (default: 1.0 second)
+
+**Displayed Information**:
+- **Frame Count**: Number of captured video frames
+- **CPU Temperature**: Current system thermal reading
+- **Temperature Trend**: Visual sparkline of recent temperature history
+
+**Controls**:
+- Press `q` in video window to quit
+- Press `Ctrl+C` to emergency stop
+
+---
+
+### game_of_life.py
+
+**Description**: Conway's Game of Life cellular automaton simulation displayed on OLED with comprehensive statistics tracking and termination detection.
+
+**Purpose**: Educational demonstration of cellular automata with visual evolution tracking and mathematical analysis.
+
+**Requirements**:
+- SSD1306 OLED display on I2C1
+- `luma.oled`
+
+**Usage**:
+```bash
+# Basic usage with default settings
+python game_of_life.py
+
+# Custom configuration examples
+python game_of_life.py --density 0.3 --fps 20 --seed 12345
+python game_of_life.py --max-period 5 --min-repeats 5
+```
+
+**Features**:
+- 128x56 pixel life grid (bottom 8px reserved for stats)
+- Configurable initial population density and RNG seed
+- Real-time generation evolution with Conway's rules
+- Comprehensive statistics: population tracking, generation counting
+- Automatic termination on extinction or stability detection
+- Oscillation pattern recognition (configurable period detection)
+- Performance metrics: runtime, average population, peak population
+- Statistical analysis with population standard deviation
+
+**Command Line Options**:
+- `--density FLOAT`: Initial live cell probability (0.0-1.0, default: 0.25)
+- `--seed INT`: Random number generator seed (default: time-based)
+- `--fps FLOAT`: Generations per second (default: 12.0)
+- `--max-period INT`: Maximum oscillator period for stability detection (default: 10)
+- `--min-repeats INT`: Required state repetitions for stability confirmation (default: 3)
+
+**Termination Conditions**:
+- **Extinction**: All cells die (population = 0)
+- **Stability**: Recurring state patterns detected (still lifes or oscillators)
+- **User Interrupt**: Manual termination with Ctrl+C
+
+**Statistics Display**:
+- Real-time generation and population counter on OLED
+- Final statistics summary: initial/peak/average population, runtime
+- Population trend sparkline visualization
+- Termination reason analysis
+
+**Controls**:
+- Press `Ctrl+C` to stop simulation and view statistics
+
+---
+
+### hamster.py
+
+**Description**: Animated hamster-in-a-wheel entertainment display featuring a running hamster inside a rotating exercise wheel with realistic animation.
+
+**Purpose**: Fun animation demo showcasing smooth motion graphics, character animation, and ASCII fallback capabilities.
+
+**Requirements**:
+- SSD1306 OLED display on I2C1
+- `luma.oled` (falls back to ASCII terminal animation if unavailable)
+
+**Usage**:
+```bash
+# Basic usage with default settings
+python hamster.py
+
+# Custom animation parameters
+python hamster.py --fps 20 --rev-time 3.0 --direction -1
+python hamster.py --addr 0x3D  # Different I2C address
+```
+
+**Features**:
+- Smooth hamster running animation with articulated leg movement
+- Rotating exercise wheel with spokes and rim
+- Configurable wheel rotation speed and direction
+- 4-pose leg animation cycle for realistic running motion
+- ASCII terminal fallback mode for headless operation
+- Real-time frame rate control and timing
+- Graceful display cleanup on exit
+
+**Animation Details**:
+- **Hamster Character**: 4-pixel radius body with animated ears, tail, and legs
+- **Exercise Wheel**: 26-pixel radius wheel with 8 spokes and track rim
+- **Leg Animation**: 4-pose cycle (extend/gather/opposite extend/gather)
+- **Wheel Motion**: Time-based rotation independent of frame rate
+- **Frame Rate**: Configurable FPS with consistent timing
+
+**Command Line Options**:
+- `--fps FLOAT`: Animation frames per second (default: 15.0)
+- `--rev-time FLOAT`: Seconds per full wheel revolution (default: 2.5)
+- `--direction INT`: Wheel rotation direction (1 or -1, default: 1)
+- `--addr HEX`: I2C address of OLED display (default: 0x3C)
+
+**Fallback Mode**:
+- ASCII art animation (40x20 character grid) if OLED unavailable
+- Simple character representation: wheel (#), spokes (*), hamster (O)
+- Leg animation indicator beneath hamster character
+
+**Controls**:
+- Press `Ctrl+C` to stop animation
 
 ---
 
