@@ -75,11 +75,10 @@ class HamsterWheel:
         base_angle = (turns % 1.0) * 2 * math.pi
         return base_angle
 
-    def _hamster_pos(self, angle: float):
-        # Hamster runs *inside* wheel, slightly inset
-        r_path = self.cfg.radius - self.cfg.inner_margin
-        x = self.cfg.cx + int(round(r_path * math.cos(angle)))
-        y = self.cfg.cy + int(round(r_path * math.sin(angle)))
+    def _hamster_pos(self):
+        """Fixed hamster position at bottom inside wheel to give running illusion."""
+        x = self.cfg.cx
+        y = self.cfg.cy + (self.cfg.radius - self.cfg.inner_margin)
         return x, y
 
     # --- Drawing helpers (OLED) ---
@@ -116,17 +115,15 @@ class HamsterWheel:
         if not self.device:
             return
         ang = self._angles()
-        hamster_angle = ang * 3  # hamster runs faster than wheel turning for visual appeal
         with canvas(self.device) as draw:
             # Wheel rim (outer + inner thickness)
             for t in range(self.cfg.track_thickness):
                 self._draw_circle(draw, self.cfg.cx, self.cfg.cy, self.cfg.radius - t)
             self._draw_spokes(draw, ang)
-            # Hamster
-            hx, hy = self._hamster_pos(hamster_angle)
+            # Hamster fixed (does not rotate with wheel)
+            hx, hy = self._hamster_pos()
             self._draw_hamster(draw, hx, hy)
-            # Footer text (top-left small)
-            draw.text((0, OLED_H - 8), "HAMSTER RUN", fill=1)
+            # (Removed footer text to use full screen)
 
     # --- Headless ASCII fallback ---
     def render_ascii(self):
@@ -134,7 +131,6 @@ class HamsterWheel:
         W, H = 40, 20
         grid = [[' ']*W for _ in range(H)]
         ang = self._angles()
-        hamster_angle = ang * 3
         cx, cy = W//2, H//2
         r = min(cx, cy) - 2
         # Wheel perimeter
@@ -152,10 +148,12 @@ class HamsterWheel:
             y = cy + int(r * math.sin(a))
             if 0 <= x < W and 0 <= y < H:
                 grid[y][x] = '*'
-        # Hamster
-        r_path = r - 3
-        hx = cx + int(r_path * math.cos(hamster_angle))
-        hy = cy + int(r_path * math.sin(hamster_angle))
+        # Hamster fixed at bottom inside wheel
+        r_path = r - 1
+        hx = cx
+        hy = cy + r_path
+        if hy >= H:
+            hy = H - 2
         if 0 <= hx < W and 0 <= hy < H:
             grid[hy][hx] = 'o'
         # Output
