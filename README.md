@@ -8,7 +8,7 @@ This guide assumes you have basic knowledge of terminal commands and Python.
 - [My Development Environments](#my-development-environments)
 - [Source Code](#source-code)
 - [Workflows and Versions](#workflows-and-versions)
-- [Pinout Diagram](#pinout-diagram)
+- [Rubik Pi Pinout Diagram](#rubik-pi-pinout-diagram)
 - [Documentation Links](#documentation-links)
 
 ## My Development Environments
