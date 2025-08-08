@@ -274,8 +274,20 @@ def create_camera_monitor(camera_index=2, oled_addr=0x3C, history_length=32):
     """
     return CameraStatsMonitor(camera_index, oled_addr, history_length)
 
+def main():
+    """Main function to run camera with CPU temperature stats on OLED"""
+    print("Starting camera with CPU temperature monitoring...")
+    
+    # Create camera monitor instance
+    # camera_index=2: Use camera at index 2 (adjust as needed)
+    # oled_addr=0x3C: OLED I2C address
+    # history_length=32: Keep 32 temperature readings for sparkline
+    monitor = create_camera_monitor(camera_index=2, oled_addr=0x3C, history_length=32)
+    
+    # Run the camera with stats monitoring
+    # update_interval=1.0: Update temperature display every 1 second
+    monitor.run(update_interval=1.0)
+
 
 if __name__ == "__main__":
-    # Example usage
-    monitor = create_camera_monitor()
-    monitor.run()
+    main()
