@@ -51,6 +51,9 @@ class HamsterWheel:
         self._start = time.time()
         self._frame = 0
         self._headless = False
+        # Leg animation parameters
+        self._leg_cycle_len = 4      # number of distinct poses
+        self._leg_frames_per_pose = 2  # frames each pose persists
 
     # --- Initialization ---
     def init(self):
@@ -102,6 +105,32 @@ class HamsterWheel:
         draw.point((x + hr//2, y - hr), fill=1)
         # Tail
         draw.point((x - hr - 1, y), fill=1)
+        # Animated legs
+        pose = (self._frame // self._leg_frames_per_pose) % self._leg_cycle_len
+        # Define leg endpoints relative to body center bottom
+        # Two front legs (right side), two back legs (left side)
+        # Poses cycle: extend / mid / opposite extend / mid
+        leg_y_base = y + hr - 1
+        # Small vertical bob to simulate stride
+        bob = 0 if pose % 2 == 0 else 1
+        # Front legs
+        if pose == 0:        # front extended forward
+            front_offsets = [(+2, 0), (+3, +1)]
+            back_offsets = [(-2, +1), (-3, 0)]
+        elif pose == 1:      # gather
+            front_offsets = [(+1, +1), (+2, +1)]
+            back_offsets = [(-1, +1), (-2, +1)]
+        elif pose == 2:      # front back, rear forward (opposite)
+            front_offsets = [(+1, +1), (+0, 0)]
+            back_offsets = [(-2, 0), (-3, +1)]
+        else:                 # gather
+            front_offsets = [(+1, +1), (+2, +1)]
+            back_offsets = [(-1, +1), (-2, +1)]
+        # Draw legs as short 1px or 2px strokes
+        for dx, dy in front_offsets:
+            draw.point((x + dx, leg_y_base + dy - bob), fill=1)
+        for dx, dy in back_offsets:
+            draw.point((x + dx, leg_y_base + dy - bob), fill=1)
 
     def _draw_spokes(self, draw, base_angle):
         for i in range(self.cfg.spokes):
@@ -123,7 +152,6 @@ class HamsterWheel:
             # Hamster fixed (does not rotate with wheel)
             hx, hy = self._hamster_pos()
             self._draw_hamster(draw, hx, hy)
-            # (Removed footer text to use full screen)
 
     # --- Headless ASCII fallback ---
     def render_ascii(self):
@@ -148,16 +176,17 @@ class HamsterWheel:
             y = cy + int(r * math.sin(a))
             if 0 <= x < W and 0 <= y < H:
                 grid[y][x] = '*'
-        # Hamster fixed at bottom inside wheel
-        r_path = r - 1
-        hx = cx
-        hy = cy + r_path
+        # Hamster body (simple 'O')
+        hx, hy = cx, cy + r - 1
         if hy >= H:
             hy = H - 2
-        if 0 <= hx < W and 0 <= hy < H:
-            grid[hy][hx] = 'o'
-        # Output
-        print("\033[H\033[J", end='')  # clear
+        grid[hy][hx] = 'O'
+        # Simple leg animation indicator underneath
+        pose = (self._frame // self._leg_frames_per_pose) % self._leg_cycle_len
+        leg_char = ['/', '|', '\\', '|'][pose]
+        if hy+1 < H:
+            grid[hy+1][hx] = leg_char
+        print("\033[H\033[J", end='')
         print("Hamster Wheel (ASCII fallback)")
         for row in grid:
             print(''.join(row))
