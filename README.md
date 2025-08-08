@@ -30,7 +30,6 @@ I am currently running [Ubuntu 24.04](docs/ubuntu-2404.md), but it needs to be f
 ## Rubik Pi Pinout Diagram
 ![Rubik Pi Pinout Diagram](assets/rubik-pi-pinout.jpg)
 
-
 ## Documentation Links
 - [Rubik Pi Documentation](https://www.thundercomm.com/rubik-pi-3/en/docs/rubik-pi-3-user-manual/)
 - [Llama API Documentation](https://llama.developer.meta.com/docs/overview/)
