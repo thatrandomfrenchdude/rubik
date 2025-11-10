@@ -35,7 +35,8 @@ I am currently running [Ubuntu 24.04](docs/ubuntu-2404.md), but it needs to be f
 ![Rubik Pi Mechanical Specs](assets/rubik-pi-mechanical-specs.jpg)
 
 ## Documentation Links
-- [Rubik Pi Documentation](https://www.thundercomm.com/rubik-pi-3/en/docs/rubik-pi-3-user-manual/)
+- [Rubik Pi Main Site](https://www.rubikpi.ai/)
+- [Rubik Pi Documentation](https://www.thundercomm.com/rubik-pi-3/en/docs/about-rubikpi/)
 - [Llama API Documentation](https://llama.developer.meta.com/docs/overview/)
 - [GitHub Repo](https://github.com/thatrandomfrenchdude/rubik)
 - [Hardware Diagram](https://www.thundercomm.com/rubik-pi-3/en/docs/rubik-pi-3-user-manual/1.0.0-a/peripherals-and-interfaces/)
