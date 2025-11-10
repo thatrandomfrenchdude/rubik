@@ -13,7 +13,6 @@ This directory contains Python scripts for the Rubik Pi device, featuring OLED d
   - [game_of_life.py](#game_of_lifepy)
   - [hamster.py](#hamsterpy)
   - [oled_chatbot.py](#oled_chatbotpy)
-  - [oled_dashboard.py](#oled_dashboardpy)
   - [sensors.py](#sensorspy)
   - [stick_figure_walker.py](#stick_figure_walkerpy)
 - [Troubleshooting](#troubleshooting)
@@ -27,7 +26,6 @@ This directory contains Python scripts for the Rubik Pi device, featuring OLED d
 | `game_of_life.py` | Conway's Game of Life simulation | SSD1306 OLED |
 | `hamster.py` | Animated hamster-in-a-wheel | SSD1306 OLED |
 | `oled_chatbot.py` | AI chatbot with OLED output | SSD1306 OLED, Internet |
-| `oled_dashboard.py` | System metrics dashboard | SSD1306 OLED |
 | `sensors.py` | MPU-6050 & BMP180 sensor monitoring | SSD1306 OLED, MPU-6050, BMP180 |
 | `stick_figure_walker.py` | Animated stick figure walking with scenery | SSD1306 OLED |
 
@@ -324,46 +322,6 @@ python oled_chatbot.py --no-display
 - `exit` - Quit the chatbot
 - `clear` - Clear display and conversation
 - `Ctrl+C` - Emergency stop
-
----
-
-### oled_dashboard.py
-
-**Description**: Real-time system monitoring dashboard displaying CPU temperature, load, RAM usage, and network ping on OLED or terminal.
-
-**Purpose**: Live IoT device monitoring with visual metrics.
-
-**Requirements**:
-- SSD1306 OLED display on I2C1 (OLED mode)
-- Network connection for ping tests
-- `luma.oled`, `psutil`, `ping3`, `rich`
-- Optional: `gpiozero` for LED alerts
-
-**Usage**:
-```bash
-# OLED display mode (default)
-python oled_dashboard.py
-
-# To use terminal mode, edit USE_OLED_DISPLAY = False in script
-```
-
-**Features**:
-- Real-time metrics: CPU temp, CPU load, RAM usage, ping latency
-- Temperature trend sparkline visualization
-- High temperature alerts (>65°C)
-- LED indicator support (if available)
-- 2-second update interval for OLED, 1-second for terminal
-- Graceful error handling for missing hardware
-
-**Metrics Displayed**:
-- **CPU Temperature**: System thermal reading
-- **CPU Load**: Current processor utilization
-- **RAM Usage**: Memory consumption percentage
-- **Ping**: Network latency to 8.8.8.8
-- **Temperature Trend**: Visual history sparkline
-
-**Controls**:
-- Press `Ctrl+C` to stop monitoring
 
 ---
 
