@@ -8,7 +8,9 @@ This guide assumes you have basic knowledge of terminal commands and Python.
 - [My Development Environments](#my-development-environments)
 - [Source Code](#source-code)
 - [Workflows and Versions](#workflows-and-versions)
-- [Rubik Pi Pinout Diagram](#rubik-pi-pinout-diagram)
+- [Rubik Pi Diagrams](#diagrams)
+  - [Pinout Diagram](#pinout-diagram)
+  - [Mechanical Specs](#mechanical-specs)
 - [Documentation Links](#documentation-links)
 
 ## My Development Environments
@@ -27,7 +29,7 @@ The [docs](docs) directory contains a subset of workflows for common tasks on th
 
 I am currently running [Ubuntu 24.04](docs/ubuntu-2404.md), but it needs to be flashed according to the [setup instructions](docs/ubuntu-2404.md#flashing-the-rubik-pi-device-with-ubuntu-2404). The [Qualcomm Linux Workflows](docs/qualcomm-linux.md) will work out-of-the-box with the Rubik Pi V02.
 
-## Rubik Pi Diagrams
+## Diagrams
 ### Pinout Diagram
 ![Rubik Pi Pinout Diagram](assets/rubik-pi-pinout.jpg)
 
